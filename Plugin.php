@@ -50,11 +50,11 @@ class Plugin extends PluginBase
             // add featured video textarea
             $widget->addFields([
                 'featuredvideo[iframe_content]' => [
-                    'label'   => 'Featured Video',
+                    'label'   => 'simplicitylab.blogfeaturedvideo::lang.backend.featuredvideo',
                     'tab'     => 'rainlab.blog::lang.post.tab_manage',
                     'type'    => 'textarea',
                     'size'    => 'small',
-                    'comment' => 'Video Iframe content'
+                    'comment' => 'simplicitylab.blogfeaturedvideo::lang.backend.description'
                 ]
             ], 'secondary');
 
