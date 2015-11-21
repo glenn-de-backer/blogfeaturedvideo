@@ -1,6 +1,7 @@
 <?php namespace Simplicitylab\BlogFeaturedVideo;
 
 use Event;
+use BackendAuth;
 use System\Classes\PluginBase;
 use Rainlab\Blog\Controllers\Posts as PostsController;
 use RainLab\Blog\Models\Post as PostModel;
@@ -33,6 +34,22 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * Register permissions for this plugin
+     */
+    public function registerPermissions()
+    {
+        return [
+            'simplicitylab.blogfeaturedvideo.access_featuredvideo' => [
+                'label' => 'Manage featured video',
+                'tab' => 'Blog'
+            ]
+        ];
+    }
+
+    /**
+     * Plugin boot method
+     */
     public function boot()
     {
         // extend post model
@@ -46,17 +63,19 @@ class Plugin extends PluginBase
 
             if (!FeaturedVideo::getFromPost($model)) return;
 
-            // add featured video textarea
-            $widget->addFields([
-                'featuredvideo[iframe_content]' => [
-                    'label'   => 'simplicitylab.blogfeaturedvideo::lang.backend.featuredvideo',
-                    'tab'     => 'rainlab.blog::lang.post.tab_manage',
-                    'type'    => 'textarea',
-                    'size'    => 'small',
-                    'comment' => 'simplicitylab.blogfeaturedvideo::lang.backend.description'
-                ]
-            ], 'secondary');
-
+            // check if user has permission to manage featured video
+            if (BackendAuth::getUser()->hasAccess('simplicitylab.blogfeaturedvideo.access_featuredvideo')){
+              // add featured video textarea
+              $widget->addFields([
+                  'featuredvideo[iframe_content]' => [
+                      'label'   => 'simplicitylab.blogfeaturedvideo::lang.backend.featuredvideo',
+                      'tab'     => 'rainlab.blog::lang.post.tab_manage',
+                      'type'    => 'textarea',
+                      'size'    => 'small',
+                      'comment' => 'simplicitylab.blogfeaturedvideo::lang.backend.description'
+                  ]
+              ], 'secondary');
+            }
         });
     }
 
