@@ -3,3 +3,5 @@
   - create_featured_videos_table.php
 1.0.2:
   - field should also be visible on create post instead of only on update post
+1.1.0:
+  - add manage featured video permissions 
