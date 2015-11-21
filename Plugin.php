@@ -44,7 +44,6 @@ class Plugin extends PluginBase
         // extend form fields
         PostsController::extendFormFields(function($widget, $model, $context) {
 
-            if ($context != 'update') return;
             if (!FeaturedVideo::getFromPost($model)) return;
 
             // add featured video textarea
