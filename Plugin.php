@@ -56,6 +56,7 @@ class Plugin extends PluginBase
         PostModel::extend(function($model) {
             // add a hasone relationship with the featuredvideo model
             $model->hasOne['featuredvideo'] = ['Simplicitylab\BlogFeaturedVideo\Models\FeaturedVideo'];
+            $model->hasOne['featuredimages'] = ['Simplicitylab\BlogFeaturedVideo\Models\FeaturedVideo'];
         });
 
         // extend form fields
@@ -67,13 +68,20 @@ class Plugin extends PluginBase
             if (BackendAuth::getUser()->hasAccess('simplicitylab.blogfeaturedvideo.access_featuredvideo')){
               // add featured video textarea
               $widget->addFields([
-                  'featuredvideo[iframe_content]' => [
-                      'label'   => 'simplicitylab.blogfeaturedvideo::lang.backend.featuredvideo',
-                      'tab'     => 'rainlab.blog::lang.post.tab_manage',
-                      'type'    => 'textarea',
-                      'size'    => 'small',
-                      'comment' => 'simplicitylab.blogfeaturedvideo::lang.backend.description'
-                  ]
+                'featuredvideo[iframe_content]' => [
+                    'label'   => 'simplicitylab.blogfeaturedvideo::lang.backend.featuredvideo',
+                    'tab'     => 'rainlab.blog::lang.post.tab_manage',
+                    'type'    => 'textarea',
+                    'size'    => 'small',
+                    'comment' => 'simplicitylab.blogfeaturedvideo::lang.backend.description'
+                ],
+                'featuredvideo[featuredimages]' => [
+                    'label'     => 'simplicitylab.blogfeaturedvideo::lang.backend.featuredimages',
+                    'tab'     	=> 'rainlab.blog::lang.post.tab_manage',
+                    'type'      => 'fileupload',
+                    'mode'      => 'image',
+                    'comment'   => 'simplicitylab.blogfeaturedvideo::lang.backend.featuredimages_description'
+                ]
               ], 'secondary');
             }
         });
