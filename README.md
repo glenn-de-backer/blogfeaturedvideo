@@ -11,9 +11,20 @@ An OctoberCMS plugin that extends the rainlab.blog with the possibility of selec
 
 ## Usage
 
+Show featured videos
 ```
 {% if post.featuredvideo.hasVideo %}
     <div class="video-wrapper">{{ post.featuredvideo.iframe_content|raw }}</div>
+{% endif %}
+
+```
+Show featured video images
+
+```
+{% if post.featuredvideo.featuredimages.count %}
+    {% for image in post.featuredvideo.featuredimages %}
+        <a href="{{ image.path }}">image.file_name</a>
+    {% endfor %}
 {% endif %}
 ```
 
