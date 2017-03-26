@@ -29,6 +29,10 @@ class FeaturedVideo extends Model
     public $belongsTo = [
         'post' => ['\RainLab\Blog\Models\Post']
     ];
+    
+    public $attachMany = [
+        'featuredimages' => ['System\Models\File', 'order' => 'sort_order']
+    ];
 
     /**
      * Automatically creates a featured video for a post if not one already
